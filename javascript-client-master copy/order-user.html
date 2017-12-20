@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link rel="stylesheet" href="lib/css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <meta charset="UTF-8">
+    <title>My Orders - CBS Canteen</title>
+
+    <!-- styles inspired by: https://www.w3schools.com/html/html_tables.asp -->
+
+
+
+</head>
+<body>
+
+<div class="container">
+
+    <div class="row" id="nav-container"></div>
+
+    <div class="checkout-table-container" id="purchase-modal">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="page-header">
+                    <h1>All orders</h1>
+
+                    <div class="errorClassOrders">
+
+
+
+                    </div>
+                </div>
+
+                <table class="table ordertable">
+                    <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Time</th>
+                        <th>Items</th>
+                        <th>Ready</th>
+                    </tr>
+                    </thead>
+                    <tbody class="orderUserList" id="orderUserList">
+
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="lib/js/jquery-3.2.1.js"></script>
+<script src="lib/js/bootstrap.js"></script>
+<script src="js/sdk.js"></script>
+<script src="js/order-user.js"></script>
+
+</body>
+</html>
