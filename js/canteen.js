@@ -9,6 +9,7 @@ $(document).ready(() => {
 
     SDK.User.findItems((data, err) => {
 
+        console.log(SDK.Storage.load("isPersonnel"));
         if (err){
             console.log(err);
         }

@@ -151,7 +151,7 @@ const SDK = {
                     username: username,
                     password: password
                 },
-                headers: {authorization: SDK.Storage.load("tokenId")}
+                headers: {authorization: SDK.Storage.load("token")}
             }, (data, err) => {
                 SDK.Storage.persist("token", data.token);
                 SDK.Storage.persist("userId", data.user_id);
@@ -185,7 +185,7 @@ const SDK = {
             <li><a href="order-staff.html">Open Orders</a></li>
             <li><a href="#" id="logout-link">Logout</a></li>
           `);
-                } if (token && !isPersonnel) {
+                } else if (token && !isPersonnel) {
                         $(".navbar-right").html(`
             <li><a href="order-user.html">Your orders</a></li>
             <li><a href="#" id="logout-link">Logout</a></li>
