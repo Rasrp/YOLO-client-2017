@@ -57,7 +57,9 @@ $(document).ready(() => {
 
     });
 
-
+    $("#proceed-basket").click(() => {
+        window.location.href = "basket.html";
+    });
 });
 
 
