@@ -65,7 +65,7 @@ const SDK = {
             SDK.request({
                 method: "GET",
                 url: "/user/getItems",
-                headers: {authorization: SDK.Storage.load("tokenId")}
+                headers: {authorization: SDK.Storage.load("token")}
             }, cb);
         },
 
@@ -77,7 +77,7 @@ const SDK = {
                     username: username,
                     password: password
                 },
-                headers: {authorization: SDK.Storage.load("tokenId")}
+                headers: {authorization: SDK.Storage.load("token")}
             }, (err) => {
 
                 if (err) {
@@ -94,7 +94,7 @@ const SDK = {
 
 
 
-        Order: {
+    Order: {
         create: (user_Id, items, cb) => {
             SDK.request({
                 method: "POST",
@@ -103,7 +103,7 @@ const SDK = {
                     User_userId: user_Id,
                     items: items
                 },
-                headers: {authorization: "Bearer" + SDK.Storage.load("tokenId")}
+                headers: {authorization: "Bearer" + SDK.Storage.load("token")}
             }, (err) => {
 
                 if (err) {
@@ -127,7 +127,7 @@ const SDK = {
             SDK.request({
                     method: "POST",
                     url: "/staff/makeReady/" + orderId,
-                    headers: {authorization: "Bearer" + SDK.Storage.load("tokenId")
+                    headers: {authorization: "Bearer" + SDK.Storage.load("token")
                     },
                     data: {
                         orderId : orderId
