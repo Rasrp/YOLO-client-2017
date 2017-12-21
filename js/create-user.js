@@ -1,3 +1,4 @@
+// inspired by https://github.com/Distribuerede-Systemer-2017/javascript-client/blob/master/js/login.js
 $(document).ready(() => {
 
     SDK.NavBar.loadNav();
