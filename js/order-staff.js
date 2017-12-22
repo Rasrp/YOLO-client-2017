@@ -1,38 +1,32 @@
 $(document).ready(() => {
 
+    //Loader navigation bar
     SDK.NavBar.loadNav();
-    SDK.Staff.findOrders((data, err) => {
 
-       // let allOrders = data;
+    //Kalder findOrders, der henter alle ordre
+    SDK.Staff.findOrders((data, err) => {
 
         const $orderStaffList = $("#order-staff-list");
 
-            if (err){
-                console.log(err);
-            }
-
+            //variabel der holder alle ordre objekter
             let allOrders = data;
 
-
+            //Kører forEach loop på alle ordre
             allOrders.forEach((order) => {
                 if (!order.isReady) {
                     let $items = [];
                     let $orderPrice = 0;
 
+                    // for loop der tilføjer alle items til et array
                     for (let i = 0; i < order.items.length; i++) {
 
                         if ($items.length >= 1) {
                             $items += ", " + order.items[i].itemName;
-                        }
-
-                        else {
+                        } else {
                             $items += order.items[i].itemName;
                         }
-
                         $orderPrice += parseInt(order.items[i].itemPrice);
-
                     }
-
 
                     const ordersHtml = `
         <div class="col-lg-4 item-container">
@@ -62,10 +56,12 @@ $(document).ready(() => {
                 </div>
             </div>
         </div>`;
+                    // Tilføjer HTML med append
                     $orderStaffList.append(ordersHtml);
                 }
             });
 
+            // Knap der sætter en ordre til at være klar for en bruger
         $(".make-ready-button").click(function () {
             const orderId = $(this).data("order-id");
             console.log(orderId);

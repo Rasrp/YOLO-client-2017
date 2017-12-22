@@ -2,19 +2,22 @@
 
 $(document).ready(() => {
 
+    //Loader naviagtion bar
     SDK.NavBar.loadNav();
 
-
-
+    // Knap til at udføre login
     $("#login-button").click(() => {
 
             const username = $("#inputUsername").val();
             const password = $("#inputPassword").val();
 
+            // Kalder SDK metode der logger dig på baggrund af username of password
             SDK.LoginOut.login(username, password, (data, err) => {
 
+                //Succes kode der skal validere om det var succesfuld kald eller eg
                 var code
 
+                //Timeout function der giver severen tid til at svare før klienten aggerer
                 setTimeout(function() {
 
                     code = statusCode;
@@ -38,6 +41,7 @@ $(document).ready(() => {
         });
     });
 
+    // Knap der fører videre til create user
     $("#create-user-button").click(() => {
         window.location.href = "create-user.html";
     });

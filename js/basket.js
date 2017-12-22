@@ -2,24 +2,24 @@
 
 $(document).ready(() => {
 
-
+    // Loads Navigation bar
     SDK.NavBar.loadNav();
 
 
     const $modalTbody = $("#basket-tbody");
     const $checkoutActions = $("#checkout-actions");
 
+    //Opretter funktion loadBasket()
     function loadBasket() {
         const currentUser = SDK.User.current();
         const item = SDK.Storage.load("basket") || [];
         let total = 0;
 
-        console.log(item);
-
-
+        //Kører forEach loop igennem alle items der ligger i localstorage "basket"
         item.forEach(entry => {
             let subtotal = entry.item.itemPrice * entry.count;
             total += subtotal;
+            // Appender en html tabel med variablerne fra Item objektet
             $modalTbody.append(`
         <tr>
             <td colspan="1"></td>
@@ -55,20 +55,24 @@ $(document).ready(() => {
 
     loadBasket();
 
+    //Knap til at ryde contents fra basket, via localstorage
     $("#clear-basket-button").click(() => {
         SDK.Storage.remove("basket");
         window.location.href = "basket.html";
     });
 
+    //Knap til at checkout og
     $("#checkout-button").click(() => {
         let userId = SDK.Storage.load("userId");
         let basket = SDK.Storage.load("basket");
         let itemList = [];
 
+        //forEach loop der tilføjer alle items der ligger i basket til en ny arrayList
         basket.forEach((item, i, basket) => {
             itemList.push(basket[i].item);
         });
 
+        // Laver en ordre på baggrund UserID og den item arrayList der blev oprættet
         SDK.Order.create(userId, itemList, (data, err)=>{
             if (err) {
                 console.log("error.");

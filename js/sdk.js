@@ -33,10 +33,12 @@ const SDK = {
 
     User: {
 
+        // Current user
         current: () => {
             return SDK.Storage.load("token");
         },
 
+        // Adder til localstorage basket, med et objekt af Item
         addToBasket: (item) => {
             let basket = SDK.Storage.load("basket");
 
@@ -61,6 +63,7 @@ const SDK = {
             SDK.Storage.persist("basket", basket);
         },
 
+        // Finder alle items i databasen
         findItems: (cb) => {
             SDK.request({
                 method: "GET",
@@ -69,6 +72,7 @@ const SDK = {
             }, cb);
         },
 
+        //Laver en user på baggrund af input af username og password
         create: (username, password, cb) => {
             SDK.request({
                 method: "POST",
@@ -95,6 +99,7 @@ const SDK = {
 
 
     Order: {
+        //Create order på baggrund af user_Id og item objekter
         create: (user_Id, items, cb) => {
             SDK.request({
                 method: "POST",
@@ -118,10 +123,14 @@ const SDK = {
     },
 
     Staff: {
+        //Finder alle ordrer på serveren
         findOrders: (cb) => {
-            SDK.request({method: "GET", url: "/staff/getOrders"}, cb);
+            SDK.request({method: "GET",
+                url: "/staff/getOrders"},
+                cb);
         },
 
+        //Markerer en ordre som klar, på baggrund  af en ordre ID
         makeReady: (orderId, cb) => {
             console.log(orderId);
             SDK.request({
@@ -142,6 +151,7 @@ const SDK = {
     },
 
     LoginOut: {
+        //Logger ind og giver dig storer user ID, token, username og isPersonnel boolean værdi
         login: (username, password, cb) => {
 
             SDK.request({
@@ -162,6 +172,7 @@ const SDK = {
             });
         },
 
+        //Fjerner alle localstorage værdier, hvilket ikke giver dig validering til noget
         logout: () => {
             SDK.Storage.remove("token");
             SDK.Storage.remove("userId");
@@ -174,9 +185,11 @@ const SDK = {
     },
 
     NavBar: {
+        //Loader navigation bar
         loadNav: (cb) => {
             $("#nav-container").load("nav.html", () => {
 
+                //På baggrund af om du har en token og hvilken boolean værdi isPersonnel er sat til, viser den en forskellig navbar
                 const token = SDK.Storage.load("token");
                 const isPersonnel = SDK.Storage.load("isPersonnel");
 
@@ -202,6 +215,7 @@ const SDK = {
     },
 
 
+    // Storage til at store værdier lokalt i localstorage
     Storage: {
         prefix: "CBSCanteenSDK",
         persist: (key, value) => {

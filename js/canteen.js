@@ -7,16 +7,13 @@ $(document).ready(() => {
 
     const $itemList = $("#item-list");
 
+    // Kalder findItems fra sdk.js
     SDK.User.findItems((data, err) => {
 
-        console.log(SDK.Storage.load("isPersonnel"));
-        if (err){
-            console.log(err);
-        }
-
+        // Opretter en variabel der har all items stored
         let allItems = data;
 
-
+        //  Kører forEach loop med et objekt af Item
         allItems.forEach((item) => {
 
             const canteenHtml = `
@@ -46,10 +43,12 @@ $(document).ready(() => {
             </div>
         </div>`;
 
+            // Tilføjer HTML kode via append
             $itemList.append(canteenHtml);
 
         });
 
+        //Knap til at kunne tilføje item til din localstorage "basket"
         $(".purchase-button").click(function () {
             const itemId = $(this).data("item-id");
             const item = data.find(item => item.itemId === itemId);
@@ -58,6 +57,7 @@ $(document).ready(() => {
 
     });
 
+    // Knap der fører videre til basket.html
     $("#proceed-basket").click(() => {
         window.location.href = "basket.html";
     });
